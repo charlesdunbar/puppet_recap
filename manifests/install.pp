@@ -1,8 +1,12 @@
 class puppet_recap::install {
 
+  $prereqs = ['sysstat', 'coreutils', 'procps', 'grep', 'gawk'],
+  package { $prereqs: ensure => "installed", }
+
   file { '/tmp/recap.tar.gz':
-    ensure => present,
-    source => 'puppet:///modules/puppet_recap/recap.tar.gz',
+    ensure  => present,
+    source  => 'puppet:///modules/puppet_recap/recap.tar.gz',
+    require => Package['sysstat'],
   }
 
   exec { 'untar_recap':
