@@ -1,6 +1,6 @@
 class puppet_recap::install {
 
-  $prereqs = ['sysstat', 'coreutils', 'procps', 'grep', 'gawk'],
+  $prereqs = ['sysstat', 'coreutils', 'procps', 'grep', 'gawk']
   package { $prereqs: ensure => "installed", }
 
   file { '/tmp/recap.tar.gz':
@@ -14,7 +14,7 @@ class puppet_recap::install {
     path    => ['/bin','/usr/bin','/usr/sbin'],
     command => 'tar -zxf recap.tar.gz',
     require => File['/tmp/recap.tar.gz'],
-    creates => "/var/log/recap",
+    creates => "/usr/sbin/recap",
   }
 
   exec { 'install_recap':
